@@ -1,0 +1,41 @@
+﻿@model Shipper
+
+<h1>@Model.CompanyName</h1>
+<h3>@Model.Phone</h3>
+<div class="row">
+    <div class="col-10">
+        <table class="table-bordered">
+            <thead>
+                <tr>
+                    <th>Müşteri</th>
+                    <th>Çalışan</th>
+                    <th>Nakliye</th>
+                    <th>Sipariş Taihi</th>
+                    <th>İ. Tarih</th>
+                    <th>Karho Ad.</th>
+                    <th>Kargo Şeh.</th>
+                    <th>Kargo Ülk.</th>
+                    <th>G. Adı</th>
+                    <th>Kargo aracı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Orders)
+                {
+                <tr>
+                    <td>@item.Customer</td>
+                    <td>@item.Employee</td>
+                    <td>@item.Freight</td>
+                    <td>@item.OrderDate</td>
+                    <td>@item.RequiredDate</td>
+                    <td>@item.ShipAddress</td>
+                    <td>@item.ShipCity</td>
+                    <td>@item.ShipCountry</td>
+                    <td>@item.ShipName</td>
+                    <td>@item.ShipVia</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
