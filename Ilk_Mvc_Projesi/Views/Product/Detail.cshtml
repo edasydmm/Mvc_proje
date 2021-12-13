@@ -1,5 +1,6 @@
 ﻿
 @model ProductViewModel
+<div class="bg-info">@TempData["Mesaj"]</div>
 
 <h2>@Model.ProductName</h2>
 <h3>@($"{Model.UnitPrice:c2}")</h3>
@@ -18,4 +19,38 @@
             Düzenle
         </a>
     </div>
+    <div class="col">
+       <input type="button" class="btn btn-danger"  value="Sil" data-toggle="modal" data-target="#confirm-delete"  />
+    </div>
 </div>
+
+<div class="modal-fade" id="confire-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header" >
+                <button type="button"  class="close" data-dismiss="modal" aria-hidden="true" ></button>
+                <h4   class="modal-title"  id="mtModelLabel">Silme Onaayı</h4>
+            </div>
+
+            <div  class="modal-body" >
+                <p>Ürün silinecektir.</p>
+                <p>Emin misiniz</p>
+                <p class="debug-url" ></p>
+                
+            </div>
+
+            <div  class="modal-footer" >
+                <button  type="button"  class="btn btn-default" data-dismiss="modal"> Vazgeç</button>
+                <a  class="btn btn-danger btn-ok" Sil ></a>
+            </div>
+        </div>
+
+    </div>('#confire-delete').on('show.')
+</div>
+
+
+
+
+
+
