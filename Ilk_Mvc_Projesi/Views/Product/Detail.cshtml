@@ -19,38 +19,39 @@
             Düzenle
         </a>
     </div>
-    <div class="col">
-       <input type="button" class="btn btn-danger"  value="Sil" data-toggle="modal" data-target="#confirm-delete"  />
+     <div class="col">
+        <input type="button" class="btn btn-danger" value="SİL!" data-toggle="modal" data-target="#confirm-delete" />
     </div>
 </div>
 
-<div class="modal-fade" id="confire-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
 
-            <div class="modal-header" >
-                <button type="button"  class="close" data-dismiss="modal" aria-hidden="true" ></button>
-                <h4   class="modal-title"  id="mtModelLabel">Silme Onaayı</h4>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Silme Onayı</h4>
             </div>
 
-            <div  class="modal-body" >
-                <p>Ürün silinecektir.</p>
-                <p>Emin misiniz</p>
-                <p class="debug-url" ></p>
-                
+            <div class="modal-body">
+                <p>Ürün silinecektir. Bu işlemin geri dönüşü yoktur!</p>
+                <p>Emin misiniz?</p>
+                <p class="debug-url"></p>
             </div>
 
-            <div  class="modal-footer" >
-                <button  type="button"  class="btn btn-default" data-dismiss="modal"> Vazgeç</button>
-                <a  class="btn btn-danger btn-ok" Sil ></a>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Vazgeç</button>
+                <a class="btn btn-danger btn-ok">SİL</a>
             </div>
         </div>
-
-    </div>('#confire-delete').on('show.')
+    </div>
 </div>
 
-
-
-
-
-
+@section Scripts
+{
+    <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', '@Url.Action("Delete","Product",new {id=Model.ProductId})');
+        });
+    </script>
+}
