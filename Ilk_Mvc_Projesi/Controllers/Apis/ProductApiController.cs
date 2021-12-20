@@ -37,12 +37,32 @@ namespace Mvc_Proje.Controllers.Apis
                     Model = product
                 });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest($"Bir hata oluştu: {ex.Message}");
-                
+
             }
-      }
+        }
+
+        [HttpPost]
+        public IActionResult Remove(int id = )
+        {
+            var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
+            if (product == null)
+                return NotFound();
+
+            _dbContext.Products.Remove(product);
+            _dbContext.SaveChanges();
+            return Ok(new
+            {
+                Message = $"{product.ProductName} isimli ürün başarıyla silindi"
+
+            });
+
+        }
       
+
+
     }
 }
+        
