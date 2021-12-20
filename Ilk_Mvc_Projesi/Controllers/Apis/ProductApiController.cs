@@ -42,6 +42,7 @@ namespace Mvc_Proje.Controllers.Apis
                 return BadRequest($"Bir hata oluştu: {ex.Message}");
                 
             }
-        }
+      }
+      
     }
 }
