@@ -50,7 +50,39 @@ namespace Mvc_Proje.Controllers.Apis
             }
         }
 
-     
+
+
+        [HttpPost]
+        public IActionResult AddCategory(CategoryViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var category = new Category()
+            {
+                CategoryName = model.CategoryName,
+                Description = model.Description
+            };
+            _dbcontext.Categories.Add(category);
+
+            try
+            {
+                _dbcontext.SaveChanges();
+                return Ok(new
+                {
+                    Message = "Kategori ekleme işlemi başarılı",
+                    Model = category
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
         [HttpPost]
         [Route("~/api/categoryapi/updatecategory/{id?}")] //custom route
         public IActionResult UpdateCategory(int? id, CategoryViewModel model)
