@@ -45,24 +45,25 @@ namespace Mvc_Proje.Controllers.Apis
         }
 
         [HttpPost]
-        public IActionResult Remove(int id = )
+        [Route("~/api/productapi/delete/{id?}")]
+        public IActionResult Delete(int id = 0)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
             if (product == null)
-                return NotFound();
-
-            _dbContext.Products.Remove(product);
-            _dbContext.SaveChanges();
-            return Ok(new
+                return NotFound("Ürün bulunamadı");
+            try
             {
-                Message = $"{product.ProductName} isimli ürün başarıyla silindi"
-
-            });
-
+                _dbContext.Products.Remove(product);
+                _dbContext.SaveChanges();
+                return Ok(new
+                {
+                    Message = $"{product.ProductName} isimli ürün başarıyla silindi"
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Bir hata oluştu: {ex.Message}");
+            }
         }
-      
-
-
     }
 }
-        
