@@ -17,18 +17,20 @@ namespace ItServiesApp
 {
     public class Startup
     {
-        
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
+        public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MyContext>(options =>
-       {
-           options.UseSqlServer(Configuration.GetConnectionString("SqlConnection"));
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SqlConnection"));
+            });
 
-       });
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
 
@@ -42,9 +44,21 @@ namespace ItServiesApp
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.AllowedForNewUsers = true;
 
-                
+                options.User.AllowedUserNameCharacters =
+                  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+
+
             });
-            
+            services.ConfigureApplicationCookie(options => {
+
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+
+               
+            });
 
 
             services.AddControllersWithViews();
