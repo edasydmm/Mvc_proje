@@ -49,22 +49,23 @@ namespace ItServiesApp
                 options.User.RequireUniqueEmail = true;
 
 
-            });
-            services.ConfigureApplicationCookie(options => {
+            }).AddEntityFrameworkStores<MyContext>();
+            services.ConfigureApplicationCookie(options =>
+            {
 
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.SlidingExpiration = true;
 
-               
+
             });
 
 
             services.AddControllersWithViews();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -72,17 +73,17 @@ namespace ItServiesApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection(); //https - güvenli sertifika ile çalýþmasý için
-            app.UseStaticFiles(); //wwwroot klasöründeki statik dosyalara eriþmek için
+            app.UseHttpsRedirection(); 
+            app.UseStaticFiles(); 
 
             app.UseRouting();
-
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-            }); //default routingin nasýl olacaðýný belirtmek için
+            }); 
         }
     }
 }

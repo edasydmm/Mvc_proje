@@ -11,7 +11,7 @@ namespace ItServiesApp.Data
     public class MyContext :IdentityDbContext<ApplicationUser,ApplicationRole,string>
     {
 
-        public MyContext(DbContextOptions options)
+        public MyContext(DbContextOptions<MyContext> options)
             : base(options)
         {
         }
