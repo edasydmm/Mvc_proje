@@ -1,4 +1,5 @@
-﻿using ItServiesApp.Models.Identity;
+﻿using ItServiesApp.Models;
+using ItServiesApp.Models.Identity;
 using ItServiesApp.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,12 +15,29 @@ namespace ItServiesApp.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<ApplicationRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
+            CheckRoles();
            
+        }
+
+        private void CheckRoles()
+        {
+            foreach(var roleName in RoleModels.Roles)
+            {
+                if (!_roleManager.RoleExistsAsync(roleName).Result)
+                {
+                    var result = _roleManager.CreateAsync(new ApplicationRole()
+                    {
+                        Name = roleName
+                    }).Result;
+                }
+            }
         }
 
         [HttpGet]
@@ -61,8 +79,9 @@ namespace ItServiesApp.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-
-                return RedirectToAction("Index", "Home");
+                var count = _userManager.Users.Count();
+                await _userManager.AddToRoleAsync(user, count == 1 ? RoleModels.Admin : RoleModels.User);
+                return RedirectToAction("Login", "Account");
             }
             else
             {

@@ -74,8 +74,8 @@ namespace ItServiesApp
             }
 
             app.UseHttpsRedirection(); 
-            app.UseStaticFiles(); 
-
+            app.UseStaticFiles();
+            app.UseAuthentication();//login logout kullanabilmek için
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
