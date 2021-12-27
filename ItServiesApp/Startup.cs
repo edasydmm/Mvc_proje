@@ -1,8 +1,11 @@
-﻿using ItServiesApp.Data;
+﻿using ItServiceApp.Services;
+using ItServiesApp.Data;
 using ItServiesApp.Models.Identity;
+using ItServiesApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,7 +52,11 @@ namespace ItServiesApp
                 options.User.RequireUniqueEmail = true;
 
 
-            }).AddEntityFrameworkStores<MyContext>();
+            }).AddEntityFrameworkStores<MyContext>().AddDefaultTokenProviders();
+
+
+
+
             services.ConfigureApplicationCookie(options =>
             {
 
@@ -59,9 +66,10 @@ namespace ItServiesApp
                 options.SlidingExpiration = true;
 
 
+
             });
 
-
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddControllersWithViews();
         }
 
@@ -70,13 +78,15 @@ namespace ItServiesApp
         {
             if (env.IsDevelopment())
             {
+                
+
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection(); 
             app.UseStaticFiles();
-            app.UseAuthentication();//login logout kullanabilmek için
             app.UseRouting();
+            app.UseAuthentication();//login logout kullanabilmek için
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
@@ -85,5 +95,7 @@ namespace ItServiesApp
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             }); 
         }
+
+       
     }
 }

@@ -102,15 +102,17 @@
 
                     <div class="navbar-btn">
                         @if (SignInManager.IsSignedIn(Context.User))
-                        {<a asp-controller="Account" asp-action="Logout"> Çıkış Yap<i class="fal fa-long-arrow-alt-right"></i></a>
-
+                        {
+                            <a asp-controller="Account" asp-action="Logout">Çıkış yap<i class="fal fa-long-arrow-alt-right"></i></a>
                         }
                         else
                         {
-                            <a asp-controller="Account" asp-action="Login"> Giriş Yap<i class="fal fa-long-arrow-alt-right"></i></a>
-
+                            <a asp-controller="Account" asp-action="Login">Giriş yap<i class="fal fa-long-arrow-alt-right"></i></a>
                         }
-
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Admin" asp-action="Index">Admin Panel<i class="fal fa-long-arrow-alt-right"></i></a>
+                        }
                     </div>
                 </div>
             </div>
