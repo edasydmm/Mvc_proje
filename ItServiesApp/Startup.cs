@@ -70,7 +70,8 @@ namespace ItServiesApp
 
             });
 
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>(); //louse coupling
+            services.AddScoped<IPaymentService, IyzicoPaymentService>(); //louse coupling
             services.AddAutoMapper(options =>
             {
                 //options.AddProfile<PaymentProfile>();
@@ -80,13 +81,13 @@ namespace ItServiesApp
             services.AddControllersWithViews();
         }
 
-      
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+         if (env.IsDevelopment())
             {
                 
-
+         
                 app.UseDeveloperExceptionPage();
             }
 

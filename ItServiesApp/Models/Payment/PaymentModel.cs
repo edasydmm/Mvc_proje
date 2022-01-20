@@ -12,7 +12,7 @@ namespace ItServiesApp.Models.Payment
         public decimal PaidPrice { get; set; }
         public int Insatllment { get; set; }
         public CardModel CardModel { get; set; }
-        public List<BasketModel> BasketModel { get; set; }
+        public List<BasketModel> BasketList { get; set; }
         public CustomerModel Customer { get; set; }
         public AdsressModel Address { get; set; }
         public string Ip { get; set; }

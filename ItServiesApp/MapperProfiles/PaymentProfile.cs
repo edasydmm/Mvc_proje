@@ -12,21 +12,13 @@ namespace ItServiesApp.MapperProfiles
     {
         public PaymentProfile()
         {
-            CreateMap<InstallmentPriceModel, InstallmentPrice>().ReverseMap();
-            CreateMap<InstallModel, InstallmentDetail>().ReverseMap();
+            CreateMap<CardModel, PaymentCard>().ReverseMap();
             CreateMap<AdsressModel, Address>().ReverseMap();
             CreateMap<CustomerModel, Buyer>().ReverseMap();
+            CreateMap<BasketModel, BasketItem>().ReverseMap();
             CreateMap<InstallmentPriceModel, InstallmentPrice>().ReverseMap();
             CreateMap<InstallModel, InstallmentDetail>().ReverseMap();
             CreateMap<PaymentResponseModel, Payment>().ReverseMap();
-
-
-
-
-
-
-
-           
         }
 
 
