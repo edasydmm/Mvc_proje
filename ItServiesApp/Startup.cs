@@ -101,11 +101,11 @@ namespace ItServiesApp
                
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Manage}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapAreaControllerRoute(
                     name: "admin",
                     areaName: "admin",
-                    pattern: "admin/{controller=Manage}/{action=Index}/{id}"
+                    pattern: "admin/{controller=Manage}/{action=Index}/{id?}"
                     );
             }); 
         }
