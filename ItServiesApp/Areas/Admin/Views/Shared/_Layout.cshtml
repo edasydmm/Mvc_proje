@@ -10,12 +10,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="-/admin-aset/images/favicon.ico">
+    <link rel="shortcut icon" href="~/admin-aset/images/favicon.ico">
     <link rel=" stylesheet" href="~/admin.aset/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/admin.aset/css/jquery-ui.min.css" />
     <link rel="stylesheet" href="~/admin.aset/css/icons.min.css" />
     <link rel="stylesheet" href="~/admin.aset/css/metisMenu.min.css" />
     <link rel="stylesheet" href="~/admin.aset/css/app.min.css" />
+    <link  rel="stylesheet" href="~/vendor/devextreme/dist/css/dx.light.css" />
+
+
     @await RenderSectionAsync("Styles", required: false)
 
 
@@ -56,7 +59,12 @@
     <script src="~/admin-assets/js/jquery.slimscroll.min.js"></script>
     <script src="~/admin-assets/plugins/apexcharts/apexcharts.min.js"></script>
     <script src="~/admin-assets/js/app.js"></script>
-    
+    <script type="text/javascript" src="~/vendor/exceljs/dist/exceljs.min.js"></script>
+    <script type="text/javascript" src="~/vendor/file-saver/dist/fileSaver.min.js"></script>
+    <script type="text/javascript" src="~/vendor/jszip/dist/jszip.min.js"></script>
+    <script type="text/javascript" src="~/vendor/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/vendor/devextreme/dist/js/dx.all.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>l>
