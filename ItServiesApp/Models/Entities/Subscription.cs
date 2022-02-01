@@ -1,0 +1,44 @@
+﻿using ItServiesApp.Models.Identity;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace ItServiesApp.Models.Entities
+{
+    public class Subscription : BaseEntity
+    {
+        public Guid SubscriptionTypeId { get; set; }
+        public decimal Amount { get; set; }
+        public decimal PaldAmount { get; set; }
+        public DateTime EndDate { get; set; }
+        [StringLength(450)]
+        public string UserId { get; set; }
+        [NotMapped]
+        public bool IsActive => EndDate > DateTime.UtcNow;
+
+        [ForeignKey(nameof(SubscriptionTypeId))]
+
+        public virtual SubscriptionType SubscriptionType { get; set; }
+        [ForeignKey(nameof(UserId))]
+        public virtual ApplicationUser User { get; set; }
+
+
+    }
+
+    public abstract class BaseEntity
+    {
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public DateTime CreatedDate { get; set; }
+        [StringLength(128)]
+        public string CreatedUser { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        [StringLength(128)]
+        public string UpdatedUser { get; set; }
+    }
+
+
+}

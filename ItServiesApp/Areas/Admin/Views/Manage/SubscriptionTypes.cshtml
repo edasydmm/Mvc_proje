@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Tüm Kullanıcılar";
+    ViewBag.Title = "Üyelik Tipleri";
 }
 <div class="container-fluid">
     <div class="row">
@@ -8,7 +8,7 @@
                 <div class="card-header">
                     <div class="row align-center">
                         <div class="col">
-                            <h4 class="card-title">Kullanıcı Detayları</h4>
+                            <h4 class="card-title">Üyelik Tipleri</h4>
                         </div>
                     </div>
                 </div>
@@ -27,15 +27,15 @@
     <script>
         var dataGrid = null;
         $(() => {
-            var url = '../../../api/userapi';
+            var url = '../../../api/subscriptiontypeapi';
             dataGrid = $("#dxGrid").dxDataGrid({
                 remoteOperations: { paging: true, filtering: true, sorting: true, grouping: true, summary: true, groupPaging: true },
                 dataSource: DevExpress.data.AspNet.createStore({
                     key: 'id',
                     loadUrl: `${url}/get`,
                     updateUrl: `${url}/update`,
-                    //insertUrl: `${url}/insert`,
-                    //deleteUrl: `${url}/delete`,
+                    insertUrl: `${url}/insert`,
+                    deleteUrl: `${url}/delete`,
                     onBeforeSend(method, ajaxOptions) {
                         ajaxOptions.xhrFields = { withCredentials: true };
                         console.log(method);
@@ -44,7 +44,9 @@
                 }),
                 editing: {
                     mode: 'form',
-                    allowUpdating: true
+                    allowUpdating: true,
+                    allowAdding: true,
+                    allowDeleting: true
                 },
                 allowColumnResizing: true,
                 showColumnLines: true,
@@ -93,22 +95,21 @@
                         dataField:"name"
                     },
                     {
-                        caption: 'Soyad',
-                        dataField: "surname"
+                        caption: 'Açıklama',
+                        dataField: "description"
                     },
                     {
-                        caption: 'Kullanıcı Adı',
-                        dataField: "userName"
+                        caption: 'Ay',
+                        dataField: "month",
+                        dataType : "number"
                     },
                     {
-                        caption: 'Email',
-                        dataField: "email"
+                        caption: 'Fiyat',
+                        dataField: "price",
+                        dataType: "number",
+                        format: "#.## TL"
                     },
-                    {
-                        caption: 'Email Onay',
-                        dataField: "emailConfirmed",
-                        dataType:"boolean"
-                    },
+                  
                     {
                         dataField: "createdDate",
                         caption: "Kayıt Tarihi",
