@@ -1,23 +1,23 @@
 ﻿@{
-    ViewBag.Title = "Üyelik Tipleri";
+    ViewBag.Title = "Üyeli Tipleri";
 }
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-center">
+                    <div class="row align-items-center">
                         <div class="col">
                             <h4 class="card-title">Üyelik Tipleri</h4>
-                        </div>
-                    </div>
-                </div>
+                        </div><!--end col-->
+                    </div>  <!--end row-->
+                </div><!--end card-header-->
                 <div class="card-body">
                     <div id="dxGrid"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div> <!--end col-->
+    </div><!--end row-->
 </div>
 
 
@@ -67,7 +67,7 @@
                 },
                 export: {
                     enabled: true,
-                    fileName: `Tüm Kullanıcılar_${parseInt(Math.random() * 1000000000)}`,
+                    fileName: `Tüm Üyelikler_${parseInt(Math.random() * 1000000000)}`,
                     allowExportSelectedData: true
                 },
                 paging: {
@@ -83,16 +83,15 @@
                 },
                 columns: [
                     {
-                        caption:`Id`,
+                        caption: 'Id',
                         dataField: "id",
                         visible: false,
                         allowFiltering: false,
                         formItem: { visible: false }
-
                     },
                     {
                         caption: 'Ad',
-                        dataField:"name"
+                        dataField: "name"
                     },
                     {
                         caption: 'Açıklama',
@@ -101,7 +100,7 @@
                     {
                         caption: 'Ay',
                         dataField: "month",
-                        dataType : "number"
+                        dataType: "number"
                     },
                     {
                         caption: 'Fiyat',
@@ -109,12 +108,11 @@
                         dataType: "number",
                         format: "#.## TL"
                     },
-                  
                     {
                         dataField: "createdDate",
                         caption: "Kayıt Tarihi",
-                        dataType: "date",
-                        format: 'dd/MM/yyyy',
+                        dataType: "datetime",
+                        format: 'dd/MM/yyyy HH:mm',
                         sortOrder: "desc"
                     }
                 ]
