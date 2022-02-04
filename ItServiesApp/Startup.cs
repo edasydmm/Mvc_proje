@@ -79,6 +79,7 @@ namespace ItServiesApp
             {
                 //options.AddProfile<PaymentProfile>();
                 options.AddProfile(typeof(PaymentProfile));
+                options.AddProfile<EntityProfile>();
 
             });
             services.AddControllersWithViews()
